@@ -1,37 +1,31 @@
 {
-  "name": "@rove-team/back-core",
-  "version": "1.1.0",
+  "name": "@hramini/node-core",
+  "version": "1.0.0",
   "description": "This is a core for every nodeJs backend",
   "main": "./dist/back-core-expose.js",
   "types": "./dist/back-core-types.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "tsc": "rm -rf dist && tsc --project ./tsconfig.publish.json && tsc-alias --project ./tsconfig.publish.json",
-    "dts:bundle": "dts-bundle-generator --external-imports express @rove-team/library-ioc-container -o ./dist/back-core-types.d.ts ./dist/back-core-expose.js",
+    "dts:bundle": "dts-bundle-generator --external-imports express @hramini/ioc -o ./dist/back-core-types.d.ts ./dist/back-core-expose.js",
     "dts:publish": "npm run tsc && npm run dts:bundle",
     "prepublishOnly": "npm run dts:publish",
     "test": "jest --watchAll --coverage",
     "dev": "ts-node ./example/index.ts"
   },
   "author": {
-    "name": "Rove Team Developers",
-    "email": "hi@roveteam.com",
-    "url": "https://roveteam.com"
+    "name": "Hamidreza Amini",
+    "email": "hramini72@gmail.com",
+    "url": "https://hramini.ir"
   },
   "contributors": [
     {
       "name": "Hamidreza Amini",
       "email": "hramini72@gmail.com",
-      "url": "http://hramini.ir"
+      "url": "https://hramini.ir"
     }
   ],
-  "keywords": [
-    "node",
-    "express",
-    "backend"
-  ],
+  "keywords": ["node", "express", "backend"],
   "license": "MIT",
   "_moduleAliases": {
     "src": "./src"
