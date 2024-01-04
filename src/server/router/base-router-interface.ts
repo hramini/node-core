@@ -17,12 +17,14 @@ export interface IMiddlewareParam {
 }
 
 export interface IMiddleware {
-  (param: IMiddlewareParam): void;
+  (request: IRequest, response: IResponse, next: INextFunction): void;
 }
+
+export type MiddlewareObject = Record<string, IMiddleware>;
 
 export interface IRouteParam {
   readonly path: string | RegExp;
-  middlewares: IMiddleware[];
+  handlers: IMiddleware[];
 }
 
 export interface IBaseRouteMakePathParam {

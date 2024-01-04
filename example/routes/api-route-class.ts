@@ -1,19 +1,11 @@
-import { type IMiddlewareParam } from 'src/server/router/base-router-interface';
-import { BaseApiRouter } from 'src/server/router/routes/base-api-route';
+import { BaseRouter } from 'src/server/router/base-router-class';
+import { BooksRouter } from './books/books-route-class';
 
-export class ApiRouter extends BaseApiRouter {
+export class ApiRouter extends BaseRouter {
   public declareRoutes(): void {
-    const { madePath } = this.makePath({ path: 'v1' });
-
     this.use({
-      path: madePath,
-      middlewares: [
-        (param: IMiddlewareParam): void => {
-          const { next } = param;
-
-          next();
-        }
-      ]
+      path: '/books',
+      handlers: [new BooksRouter().getRouter()]
     });
   }
 }

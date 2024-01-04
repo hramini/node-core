@@ -1,6 +1,5 @@
 import { Ioc } from '@hramini/ioc';
 import { Router } from 'express';
-import { MiddlewareHandler } from 'src/server/middlewares/handler/middleware-handler';
 import { type IRouteParam, type IRouter } from 'src/server/router/base-router-interface';
 
 @Ioc.injectable()
@@ -12,45 +11,47 @@ export class ExpressRouter implements IRouter {
   }
 
   public get(param: IRouteParam): void {
-    const { path, middlewares } = param;
-    const { handlers } = MiddlewareHandler.createHandlers({ middlewares });
+    const { path, handlers } = param;
+    // const { handlers } = MiddlewareHandler.createHandlers({ middlewares });
 
     this.router.get(path, ...handlers);
   }
 
   public post(param: IRouteParam): void {
-    const { path, middlewares } = param;
-    const { handlers } = MiddlewareHandler.createHandlers({ middlewares });
+    const { path, handlers } = param;
+    // const { handlers } = MiddlewareHandler.createHandlers({ middlewares });
 
     this.router.post(path, ...handlers);
   }
 
   public delete(param: IRouteParam): void {
-    const { path, middlewares } = param;
-    const { handlers } = MiddlewareHandler.createHandlers({ middlewares });
+    const { path, handlers } = param;
+    // const { handlers } = MiddlewareHandler.createHandlers({ middlewares });
 
     this.router.delete(path, ...handlers);
   }
 
   public patch(param: IRouteParam): void {
-    const { path, middlewares } = param;
-    const { handlers } = MiddlewareHandler.createHandlers({ middlewares });
+    const { path, handlers } = param;
+    // const { handlers } = MiddlewareHandler.createHandlers({ middlewares });
 
     this.router.patch(path, ...handlers);
   }
 
   public put(param: IRouteParam): void {
-    const { path, middlewares } = param;
-    const { handlers } = MiddlewareHandler.createHandlers({ middlewares });
+    const { path, handlers } = param;
+    // const { handlers } = MiddlewareHandler.createHandlers({ middlewares });
 
     this.router.put(path, ...handlers);
   }
 
   public use(param: IRouteParam): void {
-    const { path, middlewares } = param;
-    const { handlers } = MiddlewareHandler.createHandlers({ middlewares });
+    const { path, handlers } = param;
+    // const { handlers } = MiddlewareHandler.createHandlers({ middlewares });
 
-    this.router.use(path, handlers);
+    console.log({ handlers });
+
+    this.router.use(path, ...handlers);
   }
 
   public getRouter(): any {

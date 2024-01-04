@@ -3,9 +3,8 @@ import { type BaseKernel } from 'src/kernel/base-kernel-class';
 import { BaseRouterService } from 'src/kernel/base-kernel-enum';
 import { type IKernelRoute } from 'src/kernel/base-kernel-interface';
 import { BaseServer } from 'src/server/base-server-class';
-import { MiddlewareHandler } from 'src/server/middlewares/handler/middleware-handler';
 import { ExpressRouter } from 'src/server/router/applications/express/express-router';
-import { type IMiddlewareParam, type IRouter } from 'src/server/router/base-router-interface';
+import { type IRequest, type IResponse, type IRouter } from 'src/server/router/base-router-interface';
 import { Kernel } from './kernel/kernel-class';
 
 export class Server extends BaseServer {
@@ -22,20 +21,29 @@ export class Server extends BaseServer {
       this.application.use({
         path: `/${path}/`,
         handlers: [
-          MiddlewareHandler.createHandler((param: IMiddlewareParam): void => {
-            const { request, response } = param;
-
+          (request: IRequest, response: IResponse) => {
             response.sendFile(join(__dirname, `../../public/${path}`, request.url));
-          })
+          }
+          // MiddlewareHandler.createHandler((param: IMiddlewareParam): void => {
+          //   const { request, response } = param;
+
+          // })
         ]
       });
     });
   }
 
   private useRoutes(): void {
+    console.log({ routes: this.routes });
+
+    // this.application.use({
+    //   path: '/',
+    //   handlers: [new WebRouter().getRouter()]
+    // });
+
     this.application.use({
-      path: '/',
-      handlers: this.routes
+      path: '/api',
+      handlers: [this.routes]
     });
   }
 
